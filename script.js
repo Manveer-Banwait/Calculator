@@ -49,6 +49,7 @@ function calculate(nums){
        
     }
     console.log(accumulate)
+    input.innerText= accumulate.join('')
 
     
     if(operators.includes(nums)){
@@ -60,7 +61,7 @@ function calculate(nums){
         }
         
         if(accumulate.length!=0){
-        finalArray.push(parseInt(accumulate.join("")))
+        finalArray.push(parseFloat(accumulate.join("")))
         }
         finalArray.push(nums)
         accumulate.splice(0,accumulate.length)
@@ -119,25 +120,63 @@ function switchBoard(){
 
 
     
-    if(operatorArray[0]=='+'){
+    if(finalArray[1]=='+'){
         input.innerText=(add(finalArray))
+
+        if(flag==false){
         finalArray.splice(0,finalArray.length)
-        operatorArray.splice(0)
-       
-    }
+        finalArray.unshift(parseFloat(input.innerText))
+        console.log(finalArray, accumulate.length)
+        operatorCount--
+        }
+
+        if(flag==true){
+           finalArray.splice(0, finalArray.length-1)
+           finalArray.unshift(parseFloat(input.innerText))
+           operatorCount--
+           flag=false
+       }
+        return input.innerText;
+      }  
     
-    if(operatorArray[0]=='×'){
+    if(finalArray[1]=='×'){
         input.innerText=(multiply(finalArray))
+
+        if(flag==false){
         finalArray.splice(0,finalArray.length)
-        operatorArray.splice(0)
-        
-    }
+        finalArray.unshift(parseFloat(input.innerText))
+        console.log(finalArray, accumulate.length)
+        operatorCount--
+        }
+
+        if(flag==true){
+           finalArray.splice(0, finalArray.length-1)
+           finalArray.unshift(parseFloat(input.innerText))
+           operatorCount--
+           flag=false
+       }
+        return input.innerText;
+      }  
+    
    
-    if(operatorArray[0]=='÷')
+    if(finalArray[1]=='÷'){
         input.innerText=(divide(finalArray))
+
+        if(flag==false){
         finalArray.splice(0,finalArray.length)
-        operatorArray.splice(0)
-        
+        finalArray.unshift(parseFloat(input.innerText))
+        console.log(finalArray, accumulate.length)
+        operatorCount--
+        }
+
+        if(flag==true){
+           finalArray.splice(0, finalArray.length-1)
+           finalArray.unshift(parseFloat(input.innerText))
+           operatorCount--
+           flag=false
+       }
+        return input.innerText;
+      }  
 
 }
 
@@ -145,22 +184,23 @@ function switchBoard(){
 
 
 function add (adding){
-    console.log(parseInt(adding[0])+parseInt(adding[2]))
+    return (parseFloat(adding[0])+parseFloat(adding[2]))
 
 }
 
 function subtract(subtracting){
-    return(parseInt(subtracting[0])-parseInt(subtracting[2]))
+    return(parseFloat(subtracting[0])-parseFloat(subtracting[2]))
     
 }
 
 function multiply(multiplying){
-   return multiplying[0]*multiplying[1]
+    console.log("here")
+   return multiplying[0]*multiplying[2]
 
 }
 
 function divide(dividing){
-    return dividing[0]/dividing[1]
+    return dividing[0]/dividing[2]
 
 }
 
